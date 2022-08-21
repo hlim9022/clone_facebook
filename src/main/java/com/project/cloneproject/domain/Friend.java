@@ -19,10 +19,10 @@ public class Friend {
     private Long id;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "from_member_id", nullable = true)
+    @JoinColumn(name = "from_member_id")
     private Member fromMember;
 
-    @JoinColumn(name = "to_member_id", nullable = true)
+    @JoinColumn(name = "to_member_id")
     @ManyToOne(fetch = FetchType.LAZY)
     private Member toMember;
 

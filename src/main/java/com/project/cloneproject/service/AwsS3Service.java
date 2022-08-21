@@ -29,11 +29,18 @@ public class AwsS3Service {
     public static File getImageFromBase64(String base64String, String fileName) {
         String[] strings = base64String.split(",");
 
-        String extension = switch (strings[0]) {
-            case "data:image/jpeg;base64" -> ".jpeg";
-            case "data:image/png;base64" -> ".png";
-            default -> ".jpg";
-        };
+        String extension;
+        switch (strings[0]) {
+            case "data:image/jpeg;base64":
+                extension = ".jpeg";
+                break;
+            case "data:image/png;base64":
+                extension = ".png";
+                break;
+            default:
+                extension = ".jpg";
+                break;
+        }
 
         byte[] data = Base64.getDecoder().decode(strings[1]);
         File file = new File(fileName + extension);
@@ -70,10 +77,6 @@ public class AwsS3Service {
         amazonS3.putObject(new PutObjectRequest(bucket, fileName, file).
                 withCannedAcl(CannedAccessControlList.PublicRead));
     }
-
-
-
-
 
 
     @Transactional
