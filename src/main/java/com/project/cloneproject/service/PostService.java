@@ -54,10 +54,10 @@ public class PostService {
         Post findPost = postRepository.findById(postId).get();
 
         if(findPost.getMember().getUsername().equals(userDetails.getUsername())) {
-//            String deleteUrl = findPost.getImageUrl();
+            String deleteUrl = findPost.getImageUrl();
 
-            // 사진이 첨부되었던 게시글이라면 다른 사진으로 업데이트하면서 이전 사진파일을 S3에서 지워줌
-//            if(deleteUrl != null) awsS3Service.deleteImage(deleteUrl);
+             //사진이 첨부되었던 게시글이라면 다른 사진으로 업데이트하면서 이전 사진파일을 S3에서 지워줌
+            if(deleteUrl != null) awsS3Service.deleteImage(deleteUrl);
             String updateImageUrl = awsS3Service.getSavedS3ImageUrl(postRequestDto);
             postRequestDto.setImageUrl(updateImageUrl);
             findPost.update(postRequestDto);
@@ -77,7 +77,7 @@ public class PostService {
         Post findPost = postRepository.findById(postId).get();
 
         if(findPost.getMember().getUsername().equals(userDetails.getUsername())) {
-//            awsS3Service.deleteImage(findPost.getImageUrl());
+            awsS3Service.deleteImage(findPost.getImageUrl());
             postRepository.delete(findPost);
 
             return new ResponseEntity<>(ResponseDto.success("게시글 삭제가 완료되었습니다."), HttpStatus.OK);
