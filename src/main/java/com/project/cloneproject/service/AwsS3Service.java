@@ -1,5 +1,7 @@
 package com.project.cloneproject.service;
 
+import com.amazonaws.AmazonServiceException;
+import com.amazonaws.SdkClientException;
 import com.amazonaws.services.s3.AmazonS3;
 import com.amazonaws.services.s3.model.CannedAccessControlList;
 import com.amazonaws.services.s3.model.DeleteObjectRequest;
@@ -13,6 +15,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.io.*;
 import java.util.Base64;
+import java.util.Objects;
 import java.util.UUID;
 
 @Slf4j
@@ -28,8 +31,6 @@ public class AwsS3Service {
 
     public static File getImageFromBase64(String base64String, String fileName) {
         String[] strings = base64String.split(",");
-
-        // data:image/jpeg;base64, wkljetkl;ajkj;lwjtjlkej
 
         String extension;
         switch (strings[0]) {
@@ -58,6 +59,10 @@ public class AwsS3Service {
 
     @Transactional
     public String getSavedS3ImageUrl(PostRequestDto postRequestDto) {
+
+        if(postRequestDto.getImageUrl() == null ||
+                Objects.equals(postRequestDto.getImageUrl(), "")) return null;
+
         String fileName = UUID.randomUUID().toString();
         String fileUrl;
 
@@ -80,10 +85,16 @@ public class AwsS3Service {
                 withCannedAcl(CannedAccessControlList.PublicRead));
     }
 
-
     @Transactional
     public void deleteImage(String deleteUrl) {
         String deleteFileName = deleteUrl.substring(defaultEndpointUrl.length() + 1);
-        amazonS3.deleteObject(new DeleteObjectRequest(bucket,deleteFileName));
+        System.out.println(deleteFileName);
+        try {
+//            amazonS3.deleteObject(bucket,deleteFileName);
+            amazonS3.deleteObject(new DeleteObjectRequest(bucket,deleteFileName));
+        } catch (SdkClientException e) {
+            e.printStackTrace();
+        }
     }
+
 }

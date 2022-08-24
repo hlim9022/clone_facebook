@@ -42,7 +42,7 @@ public class FriendService {
         }
 
         Friend savedFriend = friendRepository.save(new Friend(member, friend));
-        member.getToMembers().add(savedFriend);
+//        member.getToMembers().add(savedFriend);
         return new ResponseEntity<>(ResponseDto.success( "팔로잉이 완료되었습니다.")
                 ,HttpStatus.OK);
     }
@@ -61,7 +61,7 @@ public class FriendService {
         List<FriendResDto> friendResDtoList = new ArrayList<>();
 
         for(Friend friend:toMembers) {
-            Member findFriend = memberRepository.findById(friend.getId()).orElse(null);
+            Member findFriend = memberRepository.findById(friend.getToMember().getId()).orElse(null);
             if(findFriend != null) friendResDtoList.add(new FriendResDto(findFriend));
         }
 

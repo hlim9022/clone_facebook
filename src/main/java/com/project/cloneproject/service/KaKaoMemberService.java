@@ -31,7 +31,7 @@ public class KaKaoMemberService {
     private final TokenProvider tokenProvider;
 
     @Value("${spring.security.oauth2.kakao.client_id}")
-    private final String KAKAO_CLIENT_ID;
+    private String KAKAO_CLIENT_ID;
 
     public ResponseDto<KakaoUserDto> kakaoLogin(String code, HttpServletResponse response) throws JsonProcessingException {
         String[] kakaoTokens = getKakaoTokens(code);

@@ -35,4 +35,9 @@ public class PostController {
                                         @AuthenticationPrincipal UserDetailsImpl userDetails) {
         return postService.removePost(postId, userDetails);
     }
+
+    @GetMapping("/api/posts")
+    public ResponseEntity<?> getPostList(@AuthenticationPrincipal UserDetailsImpl userDetails) {
+        return postService.getPostList(userDetails);
+    }
 }
