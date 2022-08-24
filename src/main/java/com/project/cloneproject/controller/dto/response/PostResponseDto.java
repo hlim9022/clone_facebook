@@ -1,4 +1,4 @@
-package com.project.cloneproject.controller.response;
+package com.project.cloneproject.controller.dto.response;
 
 import com.project.cloneproject.domain.Post;
 import lombok.*;

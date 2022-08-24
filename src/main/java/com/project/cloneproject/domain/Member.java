@@ -9,6 +9,8 @@ import org.hibernate.Hibernate;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 @Builder
@@ -29,21 +31,13 @@ public class Member extends Timestamped {
     private String username;
 
     @Column(nullable = false)
-    @JsonIgnore
     private String password;
 
     private String profileImg;
 
-/*
 
-  @OneToMany(mappedBy = "fromMember")
-  @Column
-  @JsonIgnore
-  @OneToMany(mappedBy = "post", cascade = CascadeType.REMOVE, orphanRemoval = true, fetch = FetchType.LAZY)
-  List<Friend> fromMembers = new ArrayList<>();
-
-  @OneToMany(mappedBy = "toMember")
-  List<Friend> toMembers = new ArrayList<>();*/
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "fromMember", orphanRemoval = true)
+    List<Friend> toMembers = new ArrayList<>();
 
     @Override
     public boolean equals(Object o) {
@@ -65,4 +59,6 @@ public class Member extends Timestamped {
     public boolean validatePassword(PasswordEncoder passwordEncoder, String password) {
         return passwordEncoder.matches(password, this.password);
     }
+
+
 }

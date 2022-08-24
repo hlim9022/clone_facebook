@@ -1,6 +1,6 @@
 package com.project.cloneproject.controller;
 
-import com.project.cloneproject.controller.response.ResponseDto;
+import com.project.cloneproject.controller.dto.response.ResponseDto;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;

@@ -1,13 +1,13 @@
 package com.project.cloneproject.controller;
 
 
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.project.cloneproject.controller.request.LoginRequestDto;
-import com.project.cloneproject.controller.request.MemberRequestDto;
-import com.project.cloneproject.controller.response.ResponseDto;
-import com.project.cloneproject.service.KaKaoMemberService;
+import com.project.cloneproject.controller.dto.request.LoginRequestDto;
+import com.project.cloneproject.controller.dto.request.MemberRequestDto;
+import com.project.cloneproject.controller.dto.response.ResponseDto;
+import com.project.cloneproject.domain.UserDetailsImpl;
 import com.project.cloneproject.service.MemberService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
@@ -38,5 +38,9 @@ public class MemberController {
   }
 
 
+  @GetMapping("/api/member/mypage")
+  public ResponseDto<?> myPage(@AuthenticationPrincipal UserDetailsImpl userDetails) {
+    return memberService.getMyInfo(userDetails);
+  }
 
 }

@@ -1,9 +1,9 @@
 package com.project.cloneproject.service;
 
 
-import com.project.cloneproject.controller.request.PostRequestDto;
-import com.project.cloneproject.controller.response.PostResponseDto;
-import com.project.cloneproject.controller.response.ResponseDto;
+import com.project.cloneproject.controller.dto.request.PostRequestDto;
+import com.project.cloneproject.controller.dto.response.PostResponseDto;
+import com.project.cloneproject.controller.dto.response.ResponseDto;
 import com.project.cloneproject.domain.Post;
 import com.project.cloneproject.domain.UserDetailsImpl;
 import com.project.cloneproject.repository.PostRepository;
@@ -23,7 +23,8 @@ public class PostService {
     private final AwsS3Service awsS3Service;
 
 
-    public ResponseDto<PostResponseDto> createPost(PostRequestDto postRequestDto, UserDetailsImpl userDetails) {
+    public ResponseDto<PostResponseDto> createPost(PostRequestDto postRequestDto,
+                                                   UserDetailsImpl userDetails) {
         String fileUrl = awsS3Service.getSavedS3ImageUrl(postRequestDto);
         postRequestDto.setImageUrl(fileUrl);
 

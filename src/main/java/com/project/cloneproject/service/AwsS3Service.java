@@ -4,7 +4,7 @@ import com.amazonaws.services.s3.AmazonS3;
 import com.amazonaws.services.s3.model.CannedAccessControlList;
 import com.amazonaws.services.s3.model.DeleteObjectRequest;
 import com.amazonaws.services.s3.model.PutObjectRequest;
-import com.project.cloneproject.controller.request.PostRequestDto;
+import com.project.cloneproject.controller.dto.request.PostRequestDto;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
@@ -28,6 +28,8 @@ public class AwsS3Service {
 
     public static File getImageFromBase64(String base64String, String fileName) {
         String[] strings = base64String.split(",");
+
+        // data:image/jpeg;base64, wkljetkl;ajkj;lwjtjlkej
 
         String extension;
         switch (strings[0]) {

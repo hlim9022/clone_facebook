@@ -1,13 +1,18 @@
 package com.project.cloneproject.service;
 
 
-import com.project.cloneproject.controller.request.LoginRequestDto;
-import com.project.cloneproject.controller.request.MemberRequestDto;
-import com.project.cloneproject.controller.request.TokenDto;
-import com.project.cloneproject.controller.response.MemberResponseDto;
-import com.project.cloneproject.controller.response.ResponseDto;
+import com.project.cloneproject.controller.dto.request.LoginRequestDto;
+import com.project.cloneproject.controller.dto.request.MemberRequestDto;
+import com.project.cloneproject.controller.dto.request.TokenDto;
+import com.project.cloneproject.controller.dto.response.FriendResDto;
+import com.project.cloneproject.controller.dto.response.MemberInfoDto;
+import com.project.cloneproject.controller.dto.response.MemberResponseDto;
+import com.project.cloneproject.controller.dto.response.ResponseDto;
+import com.project.cloneproject.domain.Friend;
 import com.project.cloneproject.domain.Member;
+import com.project.cloneproject.domain.UserDetailsImpl;
 import com.project.cloneproject.jwt.TokenProvider;
+import com.project.cloneproject.repository.FriendRepository;
 import com.project.cloneproject.repository.MemberRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -16,6 +21,8 @@ import org.springframework.transaction.annotation.Transactional;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 
 @RequiredArgsConstructor
@@ -31,7 +38,7 @@ public class MemberService {
     public ResponseDto<?> createMember(MemberRequestDto requestDto) {
         if (null != isPresentMember(requestDto.getUsername())) {
             return ResponseDto.fail("DUPLICATED_NICKNAME",
-                    "중복된 닉네임 입니다.");
+                    "중복된 이메일 입니다.");
         }
 
         if (!requestDto.getPassword().equals(requestDto.getPasswordConfirm())) {
@@ -77,6 +84,7 @@ public class MemberService {
         return ResponseDto.success(
                 MemberResponseDto.builder()
                         .id(member.getId())
+                        .username(member.getUsername())
                         .nickname(member.getNickname())
                         .createdAt(member.getCreatedAt())
                         .modifiedAt(member.getModifiedAt())
@@ -109,4 +117,29 @@ public class MemberService {
         response.addHeader("Access-Token-Expire-Time", tokenDto.getAccessTokenExpiresIn().toString());
     }
 
+    @Transactional
+    public ResponseDto<?> getMyInfo(UserDetailsImpl userDetails) {
+
+        Optional<Member> findMember = memberRepository.findByUsername(userDetails.getUsername());
+        if(findMember.isPresent()) {
+            Member user = findMember.get();
+            List<FriendResDto> friendResDtoList = new ArrayList<>();
+            List<Friend> toMembers = findMember.get().getToMembers();
+
+            for(Friend friend : toMembers) {
+                Member findFriend = memberRepository.findById(friend.getId()).orElse(null);
+
+                if(findMember != null) friendResDtoList.add(new FriendResDto(findFriend));
+            }
+
+            return ResponseDto.success(MemberInfoDto.builder()
+                    .id(user.getId())
+                    .username(user.getUsername())
+                    .nickname(user.getNickname())
+                    .profileImg(user.getProfileImg())
+                    .toMembers(friendResDtoList)
+                    .build());
+        }
+        return null;
+    }
 }

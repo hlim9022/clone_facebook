@@ -1,7 +1,7 @@
 package com.project.cloneproject.jwt;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.project.cloneproject.controller.response.ResponseDto;
+import com.project.cloneproject.controller.dto.response.ResponseDto;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.web.AuthenticationEntryPoint;
 import org.springframework.stereotype.Component;

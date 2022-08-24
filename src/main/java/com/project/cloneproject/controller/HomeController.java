@@ -1,7 +1,7 @@
 package com.project.cloneproject.controller;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
-import com.project.cloneproject.controller.response.ResponseDto;
+import com.project.cloneproject.controller.dto.response.ResponseDto;
 import com.project.cloneproject.service.KaKaoMemberService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;

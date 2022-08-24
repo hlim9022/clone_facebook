@@ -1,4 +1,4 @@
-package com.project.cloneproject.controller.request;
+package com.project.cloneproject.controller.dto.request;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

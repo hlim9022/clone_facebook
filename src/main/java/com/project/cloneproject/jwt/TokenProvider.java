@@ -1,7 +1,7 @@
 package com.project.cloneproject.jwt;
 
-import com.project.cloneproject.controller.request.TokenDto;
-import com.project.cloneproject.controller.response.ResponseDto;
+import com.project.cloneproject.controller.dto.request.TokenDto;
+import com.project.cloneproject.controller.dto.response.ResponseDto;
 import com.project.cloneproject.domain.Member;
 import com.project.cloneproject.domain.RefreshToken;
 import com.project.cloneproject.domain.UserDetailsImpl;

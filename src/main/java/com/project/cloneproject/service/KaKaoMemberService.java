@@ -3,13 +3,14 @@ package com.project.cloneproject.service;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.project.cloneproject.controller.request.KakaoUserDto;
-import com.project.cloneproject.controller.request.TokenDto;
-import com.project.cloneproject.controller.response.ResponseDto;
+import com.project.cloneproject.controller.dto.request.KakaoUserDto;
+import com.project.cloneproject.controller.dto.request.TokenDto;
+import com.project.cloneproject.controller.dto.response.ResponseDto;
 import com.project.cloneproject.domain.Member;
 import com.project.cloneproject.jwt.TokenProvider;
 import com.project.cloneproject.repository.MemberRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.*;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -28,6 +29,9 @@ public class KaKaoMemberService {
     private final MemberService memberService;
     private final BCryptPasswordEncoder passwordEncoder;
     private final TokenProvider tokenProvider;
+
+    @Value("${spring.security.oauth2.kakao.client_id}")
+    private final String KAKAO_CLIENT_ID;
 
     public ResponseDto<KakaoUserDto> kakaoLogin(String code, HttpServletResponse response) throws JsonProcessingException {
         String[] kakaoTokens = getKakaoTokens(code);
@@ -55,7 +59,7 @@ public class KaKaoMemberService {
 
         MultiValueMap<String, String> body = new LinkedMultiValueMap<>();
         body.add("grant_type", "authorization_code");
-        body.add("client_id", "e6517904d280b0ac1583519a1419332c");
+        body.add("client_id", KAKAO_CLIENT_ID);
         body.add("redirect_uri", "http://localhost:8080/user/kakao/callback");
         body.add("code",code);
 
