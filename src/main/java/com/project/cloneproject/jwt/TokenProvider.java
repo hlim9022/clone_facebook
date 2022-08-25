@@ -129,7 +129,7 @@ public class TokenProvider {
   @Transactional
   public ResponseDto<?> deleteRefreshToken(Member member) {
     RefreshToken refreshToken = isPresentRefreshToken(member);
-    if (null == refreshToken) {
+    if (null == refreshToken){
       return ResponseDto.fail("TOKEN_NOT_FOUND", "존재하지 않는 Token 입니다.");
     }
 
