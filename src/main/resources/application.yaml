@@ -1,0 +1,44 @@
+cloud:
+  aws:
+    stack:
+      auto: false
+    credentials:
+      access-key: ${{ secrets.AWS_ACCESS_KEY_ID }}
+      secret-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+    s3:
+      endpoint: ${{ secrets.AWS_REGIONAL_ENDPOINT }}
+
+spring:
+  servlet:
+    multipart:
+      max-file-size: 20MB
+      max-request-size: 20MB
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: ${{ secrets.MYSQL_URL }}
+    username: ${{ secrets.MYSQL_HOST }}
+    password: ${{ secrets.MYSQL_PASSWORD }}
+  jpa:
+    generate-ddl: true
+  jackson:
+    serialization:
+      fail-on-empty-beans: false
+  mvc:
+    pathmatch:
+      matching-strategy: ant_path_matcher
+
+logging:
+  level:
+    com:
+      com.amazonaws.util.EC2MetadataUtils: error
+
+
+jwt:
+  secret: ${{ secrets.TEMP_JWT_SECRET_KEY }}
+
+server:
+  servlet:
+    encoding:
+      charset: utf-8
+      enabled: true
+      force: true
