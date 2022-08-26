@@ -91,7 +91,6 @@ public class AwsS3Service {
         System.out.println(deleteFileName);
         try {
             amazonS3.deleteObject(bucket,deleteFileName);
-//            amazonS3.deleteObject(new DeleteObjectRequest(bucket,deleteFileName));
         } catch (SdkClientException e) {
             e.printStackTrace();
         }
