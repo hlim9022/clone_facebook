@@ -41,8 +41,7 @@ public class FriendService {
             return new ResponseEntity<>(ResponseDto.success("팔로잉이 취소되었습니다."),HttpStatus.OK);
         }
 
-        Friend savedFriend = friendRepository.save(new Friend(member, friend));
-//        member.getToMembers().add(savedFriend);
+        friendRepository.save(new Friend(member, friend));
         return new ResponseEntity<>(ResponseDto.success( "팔로잉이 완료되었습니다.")
                 ,HttpStatus.OK);
     }
