@@ -34,7 +34,7 @@ logging:
 
 
 jwt:
-  secret: ${{ secrets.TEMP_JWT_SECRET_KEY }}
+  secret: ${{ secrets.JWT_SECRET}}
 
 server:
   servlet:

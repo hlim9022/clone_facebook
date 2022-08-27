@@ -33,6 +33,9 @@ public class KaKaoMemberService {
     @Value("${spring.security.oauth2.kakao.client_id}")
     private String KAKAO_CLIENT_ID;
 
+    @Value("spring.security.oauth2.kakao.redirect_uri")
+    private String KAKAO_REDIRECT_URI;
+
     public ResponseDto<KakaoUserDto> kakaoLogin(String code, HttpServletResponse response) throws JsonProcessingException {
         String[] kakaoTokens = getKakaoTokens(code);
 
@@ -60,7 +63,7 @@ public class KaKaoMemberService {
         MultiValueMap<String, String> body = new LinkedMultiValueMap<>();
         body.add("grant_type", "authorization_code");
         body.add("client_id", KAKAO_CLIENT_ID);
-        body.add("redirect_uri", "http://localhost:8080/user/kakao/callback");
+        body.add("redirect_uri", KAKAO_REDIRECT_URI);
         body.add("code",code);
 
 
