@@ -33,8 +33,9 @@ logging:
       com.amazonaws.util.EC2MetadataUtils: error
 
 
-jwt:
-  secret: ${{ secrets.JWT_SECRET}}
+security:
+  jwt:
+    secret: ${{ secrets.JWT_SECRET}}
 
 server:
   servlet:

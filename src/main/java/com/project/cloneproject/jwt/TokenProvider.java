@@ -37,7 +37,7 @@ public class TokenProvider {
   private final RefreshTokenRepository refreshTokenRepository;
 //  private final UserDetailsServiceImpl userDetailsService;
 
-  public TokenProvider(@Value("${jwt.secret}") String secretKey,
+  public TokenProvider(@Value("${security.jwt.secret}") String secretKey,
       RefreshTokenRepository refreshTokenRepository) {
     this.refreshTokenRepository = refreshTokenRepository;
     byte[] keyBytes = Decoders.BASE64.decode(secretKey);
