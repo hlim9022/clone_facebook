@@ -26,7 +26,7 @@ import org.springframework.security.web.SecurityFilterChain;
 @ConditionalOnWebApplication(type = ConditionalOnWebApplication.Type.SERVLET)
 public class SecurityConfiguration {
 
-  @Value("${jwt.secret}")
+  @Value("${security.jwt.secret}")
   String SECRET_KEY;
   private final TokenProvider tokenProvider;
   private final UserDetailsServiceImpl userDetailsService;
