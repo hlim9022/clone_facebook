@@ -47,6 +47,8 @@ jobs:
         spring.datasource.username: ${{ secrets.MYSQL_HOST }}
         spring.datasource.password: ${{ secrets.MYSQL_PASSWORD }}
         security.jwt.secret: ${{ secrets.JWT_SECRET }}
+        security.oauth2.kakao.client_id: ${{ secrets.OAUTH2_KAKAO_CLIENT_ID }}
+        security.oauth2.kakao.redirect_uri: ${{ secrets.OAUTH2_KAKAO_redirect_uri }}
 
 
     # (3) Gradle build (Test 제외)
