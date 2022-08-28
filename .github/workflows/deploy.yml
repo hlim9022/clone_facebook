@@ -12,7 +12,7 @@ env:
   S3_BUCKET_NAME: kelly-github-actions-s3-bucket
   CODE_DEPLOY_APPLICATION_NAME: kelly-code-deploy
   CODE_DEPLOY_DEPLOYMENT_GROUP_NAME: kelly-server
-  RESOURCE_PATH: ./scripts/application.yml
+  RESOURCE_PATH: ./main/resources/application.yml
 
 permissions:
   contents: read
@@ -44,6 +44,7 @@ jobs:
         cloud.aws.credentials.secret-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
         cloud.aws.s3.endpoint: ${{ secrets.AWS_REGIONAL_ENDPOINT }}
         spring.datasource.url: ${{ secrets.MYSQL_URL }}
+        spring.datasource.driver-class-name: $${{ secrets.MYSQL_}}
         spring.datasource.username: ${{ secrets.MYSQL_HOST }}
         spring.datasource.password: ${{ secrets.MYSQL_PASSWORD }}
         security.jwt.secret: ${{ secrets.JWT_SECRET }}
