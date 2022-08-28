@@ -30,10 +30,10 @@ public class KaKaoMemberService {
     private final BCryptPasswordEncoder passwordEncoder;
     private final TokenProvider tokenProvider;
 
-    @Value("${spring.security.oauth2.kakao.client_id}")
+    @Value("${security.oauth2.kakao.client_id}")
     private String KAKAO_CLIENT_ID;
 
-    @Value("spring.security.oauth2.kakao.redirect_uri")
+    @Value("security.oauth2.kakao.redirect_uri")
     private String KAKAO_REDIRECT_URI;
 
     public ResponseDto<KakaoUserDto> kakaoLogin(String code, HttpServletResponse response) throws JsonProcessingException {
