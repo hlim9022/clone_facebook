@@ -12,7 +12,7 @@ env:
   S3_BUCKET_NAME: kelly-github-actions-s3-bucket
   CODE_DEPLOY_APPLICATION_NAME: kelly-code-deploy
   CODE_DEPLOY_DEPLOYMENT_GROUP_NAME: kelly-server
-  RESOURCE_PATH: ./src/main/resources/application.yml
+  RESOURCE_PATH: ./scripts/application.yml
 
 permissions:
   contents: read
