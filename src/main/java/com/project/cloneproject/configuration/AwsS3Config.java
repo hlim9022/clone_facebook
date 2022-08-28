@@ -20,6 +20,7 @@ public class AwsS3Config {
     @Value("${cloud.aws.region.static}")
     private String region;
 
+
     public AWSCredentials credentials() {
         return new BasicAWSCredentials(accessKey, secretKey);
     }
