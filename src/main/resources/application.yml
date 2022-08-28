@@ -8,7 +8,8 @@ cloud:
       access-key: ${ AWS_ACCESS_KEY_ID }
       secret-key: ${ AWS_SECRET_ACCESS_KEY }
     s3:
-      endpoint: ${AWS_REGIONAL_ENDPOINT }
+      endpoint: ${ AWS_REGIONAL_ENDPOINT }
+      bucket: ${ AWS_S3_FILE_BUCKET_NAME}
 
 spring:
   servlet:
