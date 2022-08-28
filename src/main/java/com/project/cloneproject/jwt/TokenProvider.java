@@ -36,8 +36,9 @@ public class TokenProvider {
 
   private final RefreshTokenRepository refreshTokenRepository;
 
-  public TokenProvider(@Value("${security.jwt.secret}") String secretKey,
-      RefreshTokenRepository refreshTokenRepository) {
+
+
+  public TokenProvider(@Value("${security.jwt.secret}") String secretKey, RefreshTokenRepository refreshTokenRepository) {
     this.refreshTokenRepository = refreshTokenRepository;
     byte[] keyBytes = Decoders.BASE64.decode(secretKey);
     this.key = Keys.hmacShaKeyFor(keyBytes);

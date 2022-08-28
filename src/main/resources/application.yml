@@ -3,10 +3,10 @@ cloud:
     stack:
       auto: false
     credentials:
-      access-key: ${{ secrets.AWS_ACCESS_KEY_ID }}
-      secret-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+      access-key: ${ AWS_ACCESS_KEY_ID }
+      secret-key: ${ AWS_SECRET_ACCESS_KEY }
     s3:
-      endpoint: ${{ secrets.AWS_REGIONAL_ENDPOINT }}
+      endpoint: ${AWS_REGIONAL_ENDPOINT }
 
 spring:
   servlet:
@@ -15,9 +15,9 @@ spring:
       max-request-size: 20MB
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
-    url: ${{ secrets.MYSQL_URL }}
-    username: ${{ secrets.MYSQL_HOST }}
-    password: ${{ secrets.MYSQL_PASSWORD }}
+    url: ${ MYSQL_URL }
+    username: ${ MYSQL_HOST }
+    password: ${ MYSQL_PASSWORD }
   jpa:
     generate-ddl: true
   jackson:
@@ -35,7 +35,7 @@ logging:
 
 security:
   jwt:
-    secret: ${{ secrets.JWT_SECRET }}
+    secret: ${ JWT_SECRET }
 
 server:
   servlet:
